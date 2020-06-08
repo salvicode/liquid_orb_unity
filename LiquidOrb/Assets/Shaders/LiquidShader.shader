@@ -1,6 +1,4 @@
-// Unity built-in shader source. Copyright (c) 2016 Unity Technologies. MIT license (see license.txt)
-
-Shader "MyShaders/Liquid"
+﻿Shader "MyShaders/LiquidShader"
 {
     Properties
     {
@@ -53,25 +51,26 @@ Shader "MyShaders/Liquid"
             float _WaterTransparency;
             float _WaterAngle;
 
-            fixed4 drawWater(fixed4 water_color, sampler2D color, float transparency, float height, float angle, float wave_strength, float wave_frequency, fixed2 uv);
-
+            fixed4 drawWater(fixed4 water_color, sampler2D color, float transparency, float height, float angle, float wave_strength, float wave_ratio, fixed2 uv);
             fixed4 frag (v2f i) : SV_Target
             {
+                fixed2 uv = i.texcoord;
                 float WATER_HEIGHT = _Progress;
                 float4 WATER_COLOR = _WaterColor;
                 float WAVE_STRENGTH = _WaveStrength;
                 float WAVE_FREQUENCY = _WaveFrequency;
                 float WATER_TRANSPARENCY = _WaterTransparency;
                 float WATER_ANGLE = _WaterAngle;
-                fixed4 col = drawWater(WATER_COLOR, _MainTex, WATER_TRANSPARENCY, WATER_HEIGHT, WATER_ANGLE, WAVE_STRENGTH, WAVE_FREQUENCY, i.texcoord);
-                return col;
+
+                fixed4 fragColor = drawWater(WATER_COLOR, _MainTex, WATER_TRANSPARENCY, WATER_HEIGHT, WATER_ANGLE, WAVE_STRENGTH, WAVE_FREQUENCY, uv);
+                return fragColor;
             }
 
             fixed4 drawWater(fixed4 water_color, sampler2D color, float transparency, float height, float angle, float wave_strength, float wave_frequency, fixed2 uv)
             {
+                float iTime = _Time;
                 angle *= uv.y/height+angle/1.5; //3D effect
                 wave_strength /= 1000.0;
-                float iTime = _Time;
                 float wave = sin(10.0*uv.y+10.0*uv.x+wave_frequency*iTime)*wave_strength;
                 wave += sin(20.0*-uv.y+20.0*uv.x+wave_frequency*1.0*iTime)*wave_strength*0.5;
                 wave += sin(15.0*-uv.y+15.0*-uv.x+wave_frequency*0.6*iTime)*wave_strength*1.3;
@@ -86,7 +85,7 @@ Shader "MyShaders/Liquid"
                     tex2D(color, fixed2(uv.x + wave, uv.y - wave)),
                     transparency-(transparency*uv.y/height));
                 else
-                    return fixed4(0.0,0.0,0.0,0.0);
+                    return fixed4(0,0,0,0);
             }
         ENDCG
         }

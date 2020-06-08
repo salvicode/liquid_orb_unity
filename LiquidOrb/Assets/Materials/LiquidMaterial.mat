@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: OrbLiquidMaterial
-  m_Shader: {fileID: 4800000, guid: 6ca523d3f3bd7479fb8f90aff7350e9d, type: 3}
+  m_Name: LiquidMaterial
+  m_Shader: {fileID: 4800000, guid: 22b825da7746a45f4af660e95d07e8a9, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -73,19 +73,19 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Progress: 1
+    - _Progress: 0.318
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WaterAngle: 3.01
+    - _WaterAngle: 4
     - _WaterTransparency: 1
-    - _WaveFrequency: 107.5
-    - _WaveStrength: 4.55
+    - _WaveFrequency: 180
+    - _WaveStrength: 2
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _WaterColor: {r: 1, g: 0.15690285, b: 0, a: 1}
+    - _WaterColor: {r: 1, g: 1, b: 0.2, a: 1}
